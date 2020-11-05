@@ -1,4 +1,4 @@
-# Snake game made with canvas
+# Snake game
 
 ---
 
