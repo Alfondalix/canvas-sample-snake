@@ -206,7 +206,7 @@
         ctx.strokeStyle = '#f00';
         food.drawImage(ctx, iFood);
         // Draw bonFood
-        ctx.strokeStyle = '#f00';
+        ctx.strokeStyle = '#124cf3';
         bonFood.drawImage(ctx, iBonus); //aca dejo el codigo
         // Draw score
         ctx.fillStyle = '#fff';
