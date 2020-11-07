@@ -131,10 +131,10 @@
         canvas = document.getElementById('canvas');
         ctx = canvas.getContext('2d');
         // Load assets
-        iBody.src = '../assets/body.png';
-        iFood.src = '../assets/fruit.png';
-        aEat.src = '../assets/chomp.m4a';
-        aDie.src = '../assets/dies.m4a';
+        iBody.src = '.././assets/body.png';
+        iFood.src = '.././assets/fruit.png';
+        aEat.src = '.././assets/chomp.m4a';
+        aDie.src = '.././assets/dies.m4a';
         // Create food
         food = new Rectangle(80, 80, 10, 10);
         // Load saved highscores
