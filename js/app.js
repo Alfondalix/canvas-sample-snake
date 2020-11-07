@@ -105,7 +105,7 @@
 
     function addHighscore(score) {
         posHighscore = 0;
-        while (highscores[posHighscore] > score && posHighscore < highscores.length) {
+        while (highscores[posHighscore] > score && posHighscore < highscores.length) { // aca va lo del fetch creo
         posHighscore += 1;
         }
         highscores.splice(posHighscore, 0, score);
@@ -134,7 +134,7 @@
         canvas = document.getElementById('canvas');
         ctx = canvas.getContext('2d');
         // Load assets
-        iBody.src = '.././assets/body.png';
+        iBody.src = '../assets/body.png';
         iFood.src = '.././assets/fruit.png';
         aEat.src = '.././assets/chomp.m4a';
         aDie.src = '.././assets/dies.m4a';
@@ -207,7 +207,7 @@
         food.drawImage(ctx, iFood);
         // Draw bonFood
         ctx.strokeStyle = '#124cf3';
-        bonFood.drawImage(ctx, iBonus); //aca dejo el codigo
+        bonFood.drawImage(ctx, iBonus); 
         // Draw score
         ctx.fillStyle = '#fff';
         ctx.textAlign = 'left';
@@ -277,14 +277,14 @@
             // Food Intersects
             if (body[0].intersects(food)) {
                 body.push(new Rectangle(0, 0, 10, 10));
-                score += 1;
+                score += 1; // ahora creo que es aca
                 food.x = random(canvas.width / 10 - 1) * 10;
                 food.y = random(canvas.height / 10 - 1) * 10;
                 aEat.play();
             }
             // bonfood Intersetcs
             if (body[0].intersects(bonFood)){
-                score += 3;
+                score += 3; // o aca tambien
                 bonFood.x = random(canvas.width / 10 - 1) * 10;
                 bonFood.y = random(canvas.height / 10 - 1) * 10;
                 aEat.play();
