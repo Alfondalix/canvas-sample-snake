@@ -25,6 +25,9 @@
     var iFood = new Image();
     var aEat = new Audio();
     var aDie = new Audio();
+    //bonus food
+    var iBonus = new Image();
+    var bonFood = null;
 
     window.requestAnimationFrame = (function () {
         return window.requestAnimationFrame ||
@@ -135,8 +138,11 @@
         iFood.src = '.././assets/fruit.png';
         aEat.src = '.././assets/chomp.m4a';
         aDie.src = '.././assets/dies.m4a';
+        iBonus.src = '.././assets/orrange.png';
         // Create food
         food = new Rectangle(80, 80, 10, 10);
+        // Create Bonus food
+        bonFood = new Rectangle(80, 80, 10, 10);
         // Load saved highscores
         if (localStorage.highscores) {
             highscores = localStorage.highscores.split(',');
@@ -178,6 +184,10 @@
         body.push(new Rectangle(0, 0, 10, 10));
         food.x = random(canvas.width / 10 - 1) * 10;
         food.y = random(canvas.height / 10 - 1) * 10;
+        // Bonus Food
+        bonFood.y = random(canvas.height / 10 - 1) * 10;
+        bonFood.y = random(canvas.height / 10 - 1) * 10;
+
         gameover = false;
     };
 
@@ -195,6 +205,9 @@
         // Draw food
         ctx.strokeStyle = '#f00';
         food.drawImage(ctx, iFood);
+        // Draw bonFood
+        ctx.strokeStyle = '#f00';
+        bonFood.drawImage(ctx, iBonus); //aca dejo el codigo
         // Draw score
         ctx.fillStyle = '#fff';
         ctx.textAlign = 'left';
@@ -267,6 +280,13 @@
                 score += 1;
                 food.x = random(canvas.width / 10 - 1) * 10;
                 food.y = random(canvas.height / 10 - 1) * 10;
+                aEat.play();
+            }
+            // bonfood Intersetcs
+            if (body[0].intersects(bonFood)){
+                score += 3;
+                bonFood.x = random(canvas.width / 10 - 1) * 10;
+                bonFood.y = random(canvas.height / 10 - 1) * 10;
                 aEat.play();
             }
             // Body Intersects
