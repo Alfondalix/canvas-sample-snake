@@ -9,10 +9,8 @@
   text-align: center;
 }
 
-@media (max-width: 900px) {
-  #canvas {
-    height: 90vh;
-    width: 99vw;
-    margin: 4px 2px 0px 2px;
-  }
+canvas {
+  height: 90vh;
+  width: 99vw;
+  margin: 4px 2px 0px 2px;
 }
