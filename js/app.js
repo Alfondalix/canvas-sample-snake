@@ -134,11 +134,11 @@
         canvas = document.getElementById('canvas');
         ctx = canvas.getContext('2d');
         // Load assets
-        iBody.src = '../assets/body.png';
-        iFood.src = '.././assets/fruit.png';
-        aEat.src = '.././assets/chomp.m4a';
-        aDie.src = '.././assets/dies.m4a';
-        iBonus.src = '.././assets/orrange.png';
+        iBody.src = './assets/body.png';
+        iFood.src = './assets/fruit.png';
+        aEat.src = './assets/chomp.m4a';
+        aDie.src = './assets/dies.m4a';
+        iBonus.src = './assets/orrange.png';
         // Create food
         food = new Rectangle(80, 80, 10, 10);
         // Create Bonus food
@@ -185,6 +185,7 @@
         food.x = random(canvas.width / 10 - 1) * 10;
         food.y = random(canvas.height / 10 - 1) * 10;
         // Bonus Food
+        setTimeout()
         bonFood.y = random(canvas.height / 10 - 1) * 10;
         bonFood.y = random(canvas.height / 10 - 1) * 10;
 
@@ -278,6 +279,12 @@
             if (body[0].intersects(food)) {
                 body.push(new Rectangle(0, 0, 10, 10));
                 score += 1; // ahora creo que es aca
+                //fetching data
+                    function uploadingScores(req, res){
+                    fetch("https://jsonplaceholder.typicode.com/")
+                    .then(res.get("Score sent successfully"))
+                    .catch(console.log("Error trying to send the score"));
+                }
                 food.x = random(canvas.width / 10 - 1) * 10;
                 food.y = random(canvas.height / 10 - 1) * 10;
                 aEat.play();
