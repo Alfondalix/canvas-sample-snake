@@ -114,6 +114,19 @@
         }
         localStorage.highscores = highscores.join(',');
     }
+    function scoreFetch(score){
+        fetch(`https://jsonplaceholder.typicode.com/users?posts=${score}`, {
+            method: 'GET'
+        })
+        .then(function(res){
+            if(res.ok){
+                console.log("Score sent successfully");
+            }
+        })
+        .catch(function(err){
+            console.log("Eror trying to send the score " + err);
+        })
+    }
 
     function repaint() {
         window.requestAnimationFrame(repaint);
@@ -134,11 +147,11 @@
         canvas = document.getElementById('canvas');
         ctx = canvas.getContext('2d');
         // Load assets
-        iBody.src = './assets/body.png';
-        iFood.src = './assets/fruit.png';
-        aEat.src = './assets/chomp.m4a';
-        aDie.src = './assets/dies.m4a';
-        iBonus.src = './assets/orrange.png';
+        iBody.src = 'assets/body.png';
+        iFood.src = 'assets/fruit.png';
+        aEat.src = 'assets/chomp.m4a';
+        aDie.src = 'assets/dies.m4a';
+        iBonus.src = 'assets/orrange.png';
         // Create food
         food = new Rectangle(80, 80, 10, 10);
         // Create Bonus food
@@ -185,10 +198,9 @@
         food.x = random(canvas.width / 10 - 1) * 10;
         food.y = random(canvas.height / 10 - 1) * 10;
         // Bonus Food
-        setTimeout()
         bonFood.y = random(canvas.height / 10 - 1) * 10;
         bonFood.y = random(canvas.height / 10 - 1) * 10;
-
+         
         gameover = false;
     };
 
@@ -208,7 +220,8 @@
         food.drawImage(ctx, iFood);
         // Draw bonFood
         ctx.strokeStyle = '#124cf3';
-        bonFood.drawImage(ctx, iBonus); 
+        window.setTimeout(bonFood.drawImage(ctx, iBonus), random(300)+5000); 
+
         // Draw score
         ctx.fillStyle = '#fff';
         ctx.textAlign = 'left';
@@ -223,6 +236,7 @@
             }
         }
     };
+    
     gameScene.act = function () {
         var i = 0,
         l = 0;
@@ -278,23 +292,24 @@
             // Food Intersects
             if (body[0].intersects(food)) {
                 body.push(new Rectangle(0, 0, 10, 10));
-                score += 1; // ahora creo que es aca
-                //fetching data
-                    function uploadingScores(req, res){
-                    fetch("https://jsonplaceholder.typicode.com/")
-                    .then(res.get("Score sent successfully"))
-                    .catch(console.log("Error trying to send the score"));
-                }
+                score += 1;
+                scoreFetch(score);
                 food.x = random(canvas.width / 10 - 1) * 10;
                 food.y = random(canvas.height / 10 - 1) * 10;
                 aEat.play();
             }
             // bonfood Intersetcs
             if (body[0].intersects(bonFood)){
-                score += 3; // o aca tambien
-                bonFood.x = random(canvas.width / 10 - 1) * 10;
-                bonFood.y = random(canvas.height / 10 - 1) * 10;
+                score += 3;
+                scoreFetch(score);
                 aEat.play();
+                bonFood.x = canvas.width+1;
+                bonFood.y = null;
+                setTimeout(function(){
+                    bonFood.x = random(canvas.width / 10 - 1) * 10;
+                    bonFood.y = random(canvas.height / 10 - 1) * 10;
+                }, random(3000)+ 5000);
+                
             }
             // Body Intersects
             for (i = 2, l = body.length; i < l; i += 1) {
