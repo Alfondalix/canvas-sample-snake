@@ -105,7 +105,7 @@
 
     function addHighscore(score) {
         posHighscore = 0;
-        while (highscores[posHighscore] > score && posHighscore < highscores.length) { // aca va lo del fetch creo
+        while (highscores[posHighscore] > score && posHighscore < highscores.length) {
         posHighscore += 1;
         }
         highscores.splice(posHighscore, 0, score);
@@ -121,6 +121,7 @@
         .then(function(res){
             if(res.ok){
                 console.log("Score sent successfully");
+                console.log(res);
             }
         })
         .catch(function(err){
@@ -231,7 +232,8 @@
             ctx.textAlign = 'center';
             if (gameover) {
                 ctx.fillText('GAME OVER', 150, 75);
-            } else {
+            } 
+            else {
                 ctx.fillText('PAUSE', 150, 75);
             }
         }
@@ -345,7 +347,8 @@
         for (i = 0, l = highscores.length; i < l; i += 1) {
             if (i === posHighscore) {
                 ctx.fillText('*' + highscores[i], 180, 40 + i * 10);
-            } else {
+            } 
+            else {
                 ctx.fillText(highscores[i], 180, 40 + i * 10);
             }
         }
